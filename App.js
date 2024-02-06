@@ -1,78 +1,82 @@
 /* import { StatusBar } from 'expo-status-bar'; */
 import { useState } from 'react';
 import uuid from 'react-native-uuid'
-import { Modal,StyleSheet, Text, View, TextInput, Button, ScrollView, FlatList } from 'react-native';
+import { Modal,StyleSheet, Text, View, Dimensions } from 'react-native';
+import ModalBorrarTarea from './src/components/ModalBorrarTarea';
+import AgregarTarea from './src/components/AgregarTarea';
+import ListaTareas from './src/components/ListaTareas';
 
 const  App = () => {
+  const screenWidth = Dimensions.get('window').width
   const [modalVisible, setModalVisible] = useState(false);
-  const [idBorrar, setIdBorrar] = useState("")
-  const [tarea,setTarea] = useState({title:"",
-  descripcion:"",
-  id: ""})
+  const [tareaSelect, setTareaSelect] = useState({})
+
+  const [tareaTitle,setTitle] = useState("")
+  const [tareaDesc,setDesc] = useState("")
   const [arrTarea,setArrTarea] = useState([])
   const agregarTarea = () =>{
-    setArrTarea([...arrTarea,tarea])
-    setTarea({title:" ",
-    descripcion:" ",
-    id: " "})
+    const nuevaTarea = {
+      id : uuid.v4(),
+      titulo : tareaTitle,
+      descripcion : tareaDesc,
+      completed:false,
+      createAt: new Date().toLocaleString(),
+      updateAt: new Date().toLocaleString(),
+    }
+    setArrTarea([...arrTarea,nuevaTarea])
+    setTitle("")
+    setDesc("")
     console.log(arrTarea)
   }
-  const onHandlerTitle = (text) =>{
-    console.log(text)
-    const id = uuid.v4()
-    setTarea({...tarea,title:text,id:id})
-    console.log(tarea)
+  const onHandlerTitle = (t) =>{
+    setTitle(t)
 
   }
   const onHandlerDesc = (d) =>{
-    console.log(d)
-    setTarea({...tarea,descripcion:d})
-    console.log(tarea)
+    setDesc(d)
   }
-  const onHandlerModal = (id) =>{
-    setIdBorrar(id)
-    setModalVisible(true)
+  const onHandlerModal = (tarea) =>{
+    setTareaSelect(tarea)
+    setModalVisible(!modalVisible)
     
   }
   const borrarTarea = () =>{
-    setArrTarea(arrTarea.filter(tareita => tareita.id != idBorrar))
+    setArrTarea(arrTarea.filter(tareita => tareita.id != tareaSelect.id))
+    setModalVisible(!modalVisible)
+  }
+
+  const completeTask = (id) => {
+    setArrTarea(arrTarea.map(tarea => {
+      if(tarea.id===id) return {...tarea,completed:!tarea.completed}
+    }))
   }
 
   return (
     <View style={styles.container}>
       {/* <Text style = {styles.text} >Hola, Coder! Esta es mi primera entrega. </Text>
         {/* <StatusBar style="auto" /> */} 
-      <View style={styles.inputContainer}>
-        <TextInput value={tarea.title} placeholder='Ingresar titulo' style={styles.input} onChangeText={onHandlerTitle}/>
-        <TextInput value={tarea.descripcion} placeholder='Ingresar descrip' style={styles.input} onChangeText={onHandlerDesc}/>
-        <Button title='+' onPress={agregarTarea}/>
-      </View>
+      <AgregarTarea
+        tareaTitle= {tareaTitle} 
+        onHandlerTitle= {onHandlerTitle}
+        tareaDesc= {tareaDesc} 
+        onHandlerDesc= {onHandlerDesc}
+        agregarTarea= {agregarTarea}
+      
+      />
        
-      <View style = {styles.cardContainer}>
-        <FlatList
-          data={arrTarea}
-          keyExtractor={item => item.id}
-          renderItem={({item}) => (
-            <View style = {styles.card}>
-              <Text style = {styles.text}>{item.title} </Text>
-              <Button title='-' onPress={() => onHandlerModal(item.id)}/>
-            </View>
-          )}
-        />
-
-      </View>
+      <ListaTareas
+        arrTarea = {arrTarea}
+        onHandlerModal = {onHandlerModal}
+        completeTask={completeTask}
+      />
       
-      <Modal visible = {modalVisible}>
-        <View>
-          <Text>
-            ¿Seguro que desea borrar?
-          </Text>
-          <Button title = "Sí, eliminar" onPress={()=>{console.log("Elemento eliminado"),borrarTarea(),setModalVisible(false)}}/>
-          <Button title = "No, mantener" onPress={()=>setModalVisible(false)}/>
-        </View>
-      </Modal>
-
       
+      <ModalBorrarTarea
+        modalVisible = {modalVisible}
+        tareaSelect = {tareaSelect}
+        borrarTarea = {borrarTarea}
+        onHandlerModal = {onHandlerModal}
+      />
 
     </View>
   );
@@ -90,48 +94,5 @@ const styles = StyleSheet.create({
     
   },
   
- 
-  inputContainer:{
-    flexDirection:"row",
-    alignItems:"center",
-    justifyContent:"space-around",
-    backgroundColor: '#CEF5DA',
-    borderRadius:5,
-    padding:10
-  },
-  input:{
-    width:150,
-    borderWidth: 2,
-    margin: 4,
-    padding:10,
-    backgroundColor: 'white',
-    borderRadius:5,
-    color:"black",
-  },
-  cardContainer:{
-    alignItems:"center",
-    gap:10,
-    margin:20,
   
-  },
-  card:{
-    
-    flexDirection:"row",
-    justifyContent:"space-around",
-    alignItems:"center",
-    padding:10,
-    
-  },
-
-  text:{
-    
-    color: 'black',
-    margin: 20,
-    padding:10,
-    width:250,
-    borderRadius:5,
-    
-    backgroundColor:"#CEF5DA",
-
-  },
 });
