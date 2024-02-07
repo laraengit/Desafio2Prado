@@ -10,9 +10,9 @@ const ListaTareas = ({arrTarea,onHandlerModal, completeTask}) => {
           keyExtractor={item => item.id}
           renderItem={({item}) => (
             <CardTarea
-              item= {item}
+              item = {item}
               onHandlerModal = {onHandlerModal}
-              completeTask={completeTask}
+              completeTask ={completeTask}
             />
           )}
         />

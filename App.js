@@ -5,6 +5,7 @@ import { Modal,StyleSheet, Text, View, Dimensions } from 'react-native';
 import ModalBorrarTarea from './src/components/ModalBorrarTarea';
 import AgregarTarea from './src/components/AgregarTarea';
 import ListaTareas from './src/components/ListaTareas';
+import Cabecera from './src/components/Cabecera';
 
 const  App = () => {
   const screenWidth = Dimensions.get('window').width
@@ -55,6 +56,7 @@ const  App = () => {
     <View style={styles.container}>
       {/* <Text style = {styles.text} >Hola, Coder! Esta es mi primera entrega. </Text>
         {/* <StatusBar style="auto" /> */} 
+      <Cabecera/>
       <AgregarTarea
         tareaTitle= {tareaTitle} 
         onHandlerTitle= {onHandlerTitle}
@@ -86,7 +88,7 @@ export default App
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#8FBC8F',
+    backgroundColor: '#CAF0E6',
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop:30,
