@@ -2,13 +2,16 @@ import { StyleSheet, Text, View, Button, Switch } from 'react-native'
 import React from 'react'
 import BotonPropio from './BotonPropio'
 
-const CardTarea = ({item, onHandlerModal, completeTask}) => {
+const CardTarea = ({item, onHandlerModal, completeTask, screenWidth}) => {
   return (
-    <View style = {styles.card}>
+    <View style = {[styles.card,{width:screenWidth -70,}]}>
         <View style = {styles.cabeceraCard}>
             <Text style = {styles.textTitle}>{item.titulo} </Text>
-            <Text>{item.completed ? "Riego realizado" : "Falta Riego"}</Text>
-            <Switch value = {item.completed} onValueChange={() => completeTask(item.id)}/>
+            <View style = {styles.riego}>
+                <Text style={{color:"white"}}>{item.completed ? "Riego realizado" : "Falta Riego"}</Text>
+                <Switch value = {item.completed} onValueChange={() => completeTask(item.id)}/>
+            </View>
+            
         </View>
         <Text style = {styles.textDescripcion}>{item.descripcion} </Text>
         <View style = {styles.botonera}>
@@ -35,19 +38,26 @@ export default CardTarea
 
 const styles = StyleSheet.create({
     card:{
-        
         flexDirection:"column",
         justifyContent:"space-around",
         alignItems:"center",
-        padding:10,
+        padding:20,
         borderRadius:5,
-        backgroundColor:"#CEF5DA",
+        backgroundColor:"#39997E",
         gap:20
         
       },
       cabeceraCard:{
+        width:"95%",
         flexDirection: "row",
+        flexWrap:"wrap",
         alignItems:"center",
+        justifyContent:"space-between"
+      },
+      riego:{
+        color:"white",
+        flexDirection:"row",
+        alignItems:"center"
 
 
       },
@@ -58,7 +68,7 @@ const styles = StyleSheet.create({
       },
       textTitle:{
     
-        color: 'black',
+        color: 'white',
         fontSize:18,
         margin: 20,
         padding:10,
@@ -67,6 +77,8 @@ const styles = StyleSheet.create({
       },
       textDescripcion:{
         borderRadius:5,
+        width:"90%",
+        height:100,
         padding:10,
         backgroundColor:"white",
       }

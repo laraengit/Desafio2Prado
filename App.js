@@ -62,6 +62,7 @@ const  App = () => {
         tareaDesc= {tareaDesc} 
         onHandlerDesc= {onHandlerDesc}
         agregarTarea= {agregarTarea}
+        screenWidth={screenWidth}
       
       />
        
@@ -91,6 +92,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#CAF0E6',
     alignItems: 'center',
     justifyContent: "flex-start",
+    gap:10,
 
   },
   

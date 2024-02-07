@@ -4,7 +4,7 @@ import CardTarea from './CardTarea'
 
 const ListaTareas = ({arrTarea,onHandlerModal,screenWidth, completeTask}) => {
   return (
-    <View style = {[styles.cardContainer,{width:screenWidth -40}]}>
+    <View style = {styles.cardContainer}>
         <FlatList
           data={arrTarea}
           keyExtractor={item => item.id}
@@ -13,10 +13,10 @@ const ListaTareas = ({arrTarea,onHandlerModal,screenWidth, completeTask}) => {
               item = {item}
               onHandlerModal = {onHandlerModal}
               completeTask ={completeTask}
+              screenWidth = {screenWidth}
             />
           )}
         />
-
       </View>
   )
 }
@@ -25,9 +25,8 @@ export default ListaTareas
 
 const styles = StyleSheet.create({
     cardContainer:{
-        alignItems:"center",
-        gap:10,
-        margin:20,
+        padding:10,
+        
       
       },
       
