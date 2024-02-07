@@ -2,9 +2,9 @@ import { StyleSheet, Text, View, Button, Switch } from 'react-native'
 import React from 'react'
 import BotonPropio from './BotonPropio'
 
-const CardTarea = ({item, onHandlerModal, completeTask, screenWidth}) => {
+const CardTarea = ({item, onHandlerModal, completeTask, screenWidth, screenHeigth}) => {
   return (
-    <View style = {[styles.card,{width:screenWidth -70,}]}>
+    <View style = {[styles.card,{width:screenWidth -70,height:screenHeigth -550}]}>
         <View style = {styles.cabeceraCard}>
             <Text style = {styles.textTitle}>{item.titulo} </Text>
             <View style = {styles.riego}>
@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
         padding:20,
         borderRadius:5,
         backgroundColor:"#39997E",
-        gap:20
+        gap:30,
+        margin:40,
         
       },
       cabeceraCard:{
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
       textDescripcion:{
         borderRadius:5,
         width:"90%",
-        height:100,
+        height:50,
         padding:10,
         backgroundColor:"white",
       }

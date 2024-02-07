@@ -2,10 +2,11 @@ import { StyleSheet, Text, View, FlatList } from 'react-native'
 import React from 'react'
 import CardTarea from './CardTarea'
 
-const ListaTareas = ({arrTarea,onHandlerModal,screenWidth, completeTask}) => {
+const ListaTareas = ({arrTarea,onHandlerModal, completeTask, screenWidth, screenHeigth}) => {
   return (
-    <View style = {styles.cardContainer}>
+    <View style = {[styles.cardContainer,{height:screenHeigth -450}]}>
         <FlatList
+          pagingEnabled = {true}
           data={arrTarea}
           keyExtractor={item => item.id}
           renderItem={({item}) => (
@@ -14,6 +15,7 @@ const ListaTareas = ({arrTarea,onHandlerModal,screenWidth, completeTask}) => {
               onHandlerModal = {onHandlerModal}
               completeTask ={completeTask}
               screenWidth = {screenWidth}
+              screenHeigth = {screenHeigth}
             />
           )}
         />
@@ -25,9 +27,9 @@ export default ListaTareas
 
 const styles = StyleSheet.create({
     cardContainer:{
-        padding:10,
-        
       
+        justifyContent:"center",
+        alignItems:"center",
       },
       
 })
