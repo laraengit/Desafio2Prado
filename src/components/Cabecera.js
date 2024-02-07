@@ -15,6 +15,6 @@ const styles = StyleSheet.create({
     cabecera:{
         alignItems:"center",
         justifyContent:"center",
-        marginTop:100,
+        
     }
 })

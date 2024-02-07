@@ -11,7 +11,6 @@ const  App = () => {
   const screenWidth = Dimensions.get('window').width
   const [modalVisible, setModalVisible] = useState(false);
   const [tareaSelect, setTareaSelect] = useState({})
-
   const [tareaTitle,setTitle] = useState("")
   const [tareaDesc,setDesc] = useState("")
   const [arrTarea,setArrTarea] = useState([])
@@ -70,6 +69,7 @@ const  App = () => {
         arrTarea = {arrTarea}
         onHandlerModal = {onHandlerModal}
         completeTask={completeTask}
+        screenWidth={screenWidth}
       />
       
       
@@ -90,10 +90,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#CAF0E6',
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop:30,
-    
-    
+    justifyContent: "flex-start",
+
   },
   
   

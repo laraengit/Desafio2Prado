@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Modal, Button } from 'react-native'
 import React from 'react'
+import BotonPropio from './BotonPropio'
 
 const ModalBorrarTarea = ({tareaSelect,borrarTarea,onHandlerModal,modalVisible}) => {
 
@@ -14,8 +15,18 @@ const ModalBorrarTarea = ({tareaSelect,borrarTarea,onHandlerModal,modalVisible})
             <Text>
                 ¿Seguro que desea borrar el elemento {tareaSelect.titulo}?
             </Text>
-            <Button title = "Sí, eliminar" onPress={borrarTarea}/>
-            <Button title = "No, mantener" onPress={()=>onHandlerModal({})}/>
+            <BotonPropio
+                nombre={"Sí, eliminar"}
+                onPress={borrarTarea}
+                colorFondo={"#F5645E"}
+            />
+            <BotonPropio
+                nombre={"No, mantener"}
+                onPress={()=>onHandlerModal({})}
+                colorFondo={"#5FA2C2"}
+            />
+            {/* <Button title = "Sí, eliminar" onPress={borrarTarea}/>
+            <Button title = "No, mantener" onPress={()=>onHandlerModal({})}/> */}
             </View>
         </Modal>
   )

@@ -2,9 +2,9 @@ import { StyleSheet, Text, View, FlatList } from 'react-native'
 import React from 'react'
 import CardTarea from './CardTarea'
 
-const ListaTareas = ({arrTarea,onHandlerModal, completeTask}) => {
+const ListaTareas = ({arrTarea,onHandlerModal,screenWidth, completeTask}) => {
   return (
-    <View style = {styles.cardContainer}>
+    <View style = {[styles.cardContainer,{width:screenWidth -40}]}>
         <FlatList
           data={arrTarea}
           keyExtractor={item => item.id}

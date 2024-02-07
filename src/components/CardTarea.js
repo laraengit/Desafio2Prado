@@ -5,20 +5,28 @@ import BotonPropio from './BotonPropio'
 const CardTarea = ({item, onHandlerModal, completeTask}) => {
   return (
     <View style = {styles.card}>
-        <Text style = {styles.text}>{item.titulo} </Text>
-        <BotonPropio
-            nombre={"Borrar"}
-            colorFondo={"#FACD77"}
-            onPress={onHandlerModal}
-        />
-        <BotonPropio
-            nombre={"Editar"}
-            colorFondo={"#21B55C"}
-            onPress={console.log("Editar")}
-        />
+        <View style = {styles.cabeceraCard}>
+            <Text style = {styles.textTitle}>{item.titulo} </Text>
+            <Text>{item.completed ? "Riego realizado" : "Falta Riego"}</Text>
+            <Switch value = {item.completed} onValueChange={() => completeTask(item.id)}/>
+        </View>
+        <Text style = {styles.textDescripcion}>{item.descripcion} </Text>
+        <View style = {styles.botonera}>
+            <BotonPropio
+                nombre={"Borrar"}
+                colorFondo={"#FACD77"}
+                onPress={() => onHandlerModal(item)}
+            />
+            <BotonPropio
+                nombre={"Editar"}
+                colorFondo={"#F5A69E"}
+                onPress={() => console.log("Editar")}
+            />
+        </View>
+        
         {/* <Button title='-' onPress={() => onHandlerModal(item)}/> */}
-        <Switch value = {item.completed} onValueChange={() => completeTask(item.id)}/>
-        <Text>{item.completed ? "Riego realizado" : "Falta Riego"}</Text>
+        
+        
     </View>
   )
 }
@@ -28,21 +36,38 @@ export default CardTarea
 const styles = StyleSheet.create({
     card:{
         
-        flexDirection:"row",
+        flexDirection:"column",
         justifyContent:"space-around",
         alignItems:"center",
         padding:10,
+        borderRadius:5,
+        backgroundColor:"#CEF5DA",
+        gap:20
         
       },
-      text:{
+      cabeceraCard:{
+        flexDirection: "row",
+        alignItems:"center",
+
+
+      },
+      botonera:{
+        flexDirection:"row",
+        gap:25,
+
+      },
+      textTitle:{
     
         color: 'black',
+        fontSize:18,
         margin: 20,
         padding:10,
-        width:250,
-        borderRadius:5,
         
-        backgroundColor:"#CEF5DA",
-    
+
       },
+      textDescripcion:{
+        borderRadius:5,
+        padding:10,
+        backgroundColor:"white",
+      }
 })

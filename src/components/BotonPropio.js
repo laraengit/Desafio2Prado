@@ -14,9 +14,11 @@ export default BotonPropio
 const styles = StyleSheet.create({
     boton:{
         borderRadius:5,
+        paddingVertical: 5,
+        paddingHorizontal:10
     },
     textBoton:{
-        color: 'black',
+        color: 'white',
     }
     
 
